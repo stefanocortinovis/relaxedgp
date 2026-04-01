@@ -1,0 +1,5 @@
+name: "banana"
+task: "classification"
+train_only: true
+origin: "openml"
+normalize: false

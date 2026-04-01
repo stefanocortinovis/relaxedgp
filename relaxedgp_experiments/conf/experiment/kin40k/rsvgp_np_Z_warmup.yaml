@@ -1,0 +1,40 @@
+# @package _global_
+experiment_name: sweeps
+experiment_question: "sweeps for kin40k dataset"
+
+debug:
+  grad_Z: true
+  movement_Z: true
+eval:
+  log_wandb: true
+
+model:
+  kernel_name: squared_exponential
+  init_Z_method: kmeans
+  preconditioner: T
+  num_probes: 256
+
+training:
+  adam_lr: 5e-3
+  batch_size: 100
+  n_iter: 20000
+  train_Z: true
+  warmup_Z: 1000
+  adam_lr_Z: 1e-3
+  adam_beta_1_Z: 0.99
+  reduce_on_plateau_Z: true
+
+defaults:
+  - override /dataset: kin40k
+  - override /training/natgrad_schedule: frobenius_constant
+
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: hydra/${experiment_name}/${dataset.name}
+    subdir: ${model.name}/${model.M}/${model.kernel_name}/${training.train_Z}/${training.adam_lr}/${seed}/${now:%Y-%m-%d}/${now:%H-%M-%S}/
+  sweeper:
+    params:
+      +model.name: rsvgp_n
+      ++model.M: 1000,2000,3000,4000
+      ++training.natgrad_schedule.stopping_criterion.tol: 5e-3

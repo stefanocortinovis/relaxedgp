@@ -1,0 +1,5 @@
+name: "elevators"
+task: "regression"
+train_only: false
+origin: "uci"
+normalize: true

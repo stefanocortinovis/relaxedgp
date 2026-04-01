@@ -1,0 +1,24 @@
+experiment_name: ???
+experiment_question: ???
+seed: 0
+default_float: float64  # possible values: float16, float32, float64
+
+debug:
+  force_bfgs: false
+  full_loss: false
+  initialise_optimal_T: false
+  log_all_T: false
+  grad_Z: false
+  movement_Z: false
+
+defaults:
+  - dataset: snelson  # possible values: snelson, energy
+  - eval: default
+  - model: default
+  - training: default
+  - training/natgrad_schedule: constant
+  - _self_
+
+hydra:
+  run:
+    dir: hydra/${now:%Y-%m-%d}/${now:%H-%M-%S}/

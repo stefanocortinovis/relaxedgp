@@ -1,0 +1,4 @@
+evaluate_every: 1000
+log_wandb: false
+log_quality_T: false
+batch_size: null

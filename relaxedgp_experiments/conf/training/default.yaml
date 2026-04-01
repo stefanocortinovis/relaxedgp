@@ -1,0 +1,9 @@
+n_iter: 10000
+adam_lr: 1e-3
+batch_size: null
+reduce_on_plateau: false
+reduce_on_plateau_Z: false
+train_Z: false
+warmup_Z: 0
+adam_lr_Z: ${.adam_lr}
+adam_beta_1_Z: 0.9

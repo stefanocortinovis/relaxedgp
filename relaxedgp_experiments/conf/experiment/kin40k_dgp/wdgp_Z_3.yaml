@@ -1,0 +1,36 @@
+# @package _global_
+experiment_name: sweeps
+experiment_question: "sweeps for kin40k dataset"
+
+eval:
+  num_samples: 100
+  log_wandb: true
+
+model:
+  kind: deep
+  kernel_name: squared_exponential
+  inner_layer_qsqrt_factor: 1e-2
+  likelihood_noise_variance: 1e-1
+  hidden_kernel_variance: 1e-4
+  preconditioner: identity
+
+training:
+  adam_lr: 5e-3
+  batch_size: 1000
+  n_iter: 200000
+  train_Z: true
+  reduce_on_plateau: true
+
+defaults:
+  - override /dataset: kin40k
+
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: hydra/${experiment_name}/${dataset.name}
+    subdir: ${model.name}/${model.M}/${model.kernel_name}/${training.train_Z}/${training.adam_lr}/${seed}/${now:%Y-%m-%d}/${now:%H-%M-%S}/
+  sweeper:
+    params:
+      +model.name: wsvgp
+      ++model.M: 500
+      ++model.num_layers: 3

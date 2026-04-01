@@ -1,0 +1,5 @@
+name: "kin40k"
+task: "regression"
+train_only: false
+origin: "uci"
+normalize: true

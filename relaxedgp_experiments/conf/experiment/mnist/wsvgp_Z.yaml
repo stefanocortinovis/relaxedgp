@@ -1,0 +1,32 @@
+# @package _global_
+experiment_name: sweeps
+experiment_question: "sweep for mnist dataset"
+
+eval:
+  num_samples: 100
+  log_wandb: true
+  batch_size: 1000
+
+model:
+  kind: shallow
+  kernel_name: squared_exponential
+  init_Z_method: random
+
+training:
+  adam_lr: 1e-3
+  batch_size: 200
+  n_iter: 450000
+  train_Z: true
+
+defaults:
+  - override /dataset: mnist
+
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: hydra/${experiment_name}/${dataset.name}
+    subdir: ${model.name}/${model.M}/${model.kernel_name}/${training.train_Z}/${training.adam_lr}/${seed}/${now:%Y-%m-%d}/${now:%H-%M-%S}/
+  sweeper:
+    params:
+      +model.name: wsvgp
+      ++model.M: 750

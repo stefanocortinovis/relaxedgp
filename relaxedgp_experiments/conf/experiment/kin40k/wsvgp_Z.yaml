@@ -1,0 +1,32 @@
+# @package _global_
+experiment_name: sweeps
+experiment_question: "sweeps for kin40k dataset"
+
+debug:
+  grad_Z: true
+  movement_Z: true
+eval:
+  log_wandb: true
+
+model:
+  kernel_name: squared_exponential
+  init_Z_method: kmeans
+
+training:
+  adam_lr: 5e-3
+  batch_size: 100
+  n_iter: 20000
+  train_Z: true
+
+defaults:
+  - override /dataset: kin40k
+
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: hydra/${experiment_name}/${dataset.name}
+    subdir: ${model.name}/${model.M}/${model.kernel_name}/${training.train_Z}/${training.adam_lr}/${seed}/${now:%Y-%m-%d}/${now:%H-%M-%S}/
+  sweeper:
+    params:
+      +model.name: wsvgp
+      ++model.M: 1000,2000,3000,4000

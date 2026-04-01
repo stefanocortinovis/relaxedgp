@@ -1,0 +1,34 @@
+[project]
+name = "relaxedgp"
+version = "0.0.3"
+dependencies = [
+    "gpflow==2.9.2",
+    "gpflux==0.4.4",
+]
+
+[project.optional-dependencies]
+experiments = [
+    "hydra-core",
+    "hydra-joblib-launcher",
+    "matplotlib",
+    "openml",
+    "scikit-learn",
+    "tqdm",
+    "uci_datasets",
+    "wandb",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["relaxedgp/*", "relaxedgp_experiments/*"]
+
+[tool.ruff]
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+fixable = ["I001", "F401"]
+ignore = ["E731", "E741"]
+select = ["E", "F", "I001"]

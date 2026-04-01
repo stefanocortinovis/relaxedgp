@@ -1,0 +1,6 @@
+name: ???  # possible values: gpr, sgpr, msvgp, wsvgp, lsvgp, rsvgp, rsvgp_n
+kind: shallow  # possible values: shallow, deep
+kernel_name: squared_exponential  # possible values: squared_exponential, gamma_exponential, arc_cosine
+M: null
+init_Z_method: random  # possible values: random, kmeans
+preconditioner: "identity"

@@ -1,0 +1,5 @@
+name: "mnist_784"
+task: "classification_multi_10"
+train_only: false
+origin: "keras"
+normalize: true

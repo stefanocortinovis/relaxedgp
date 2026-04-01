@@ -1,0 +1,6 @@
+_target_: relaxedgp.schedules.ConstantSchedule
+max_steps: 100
+value: 1.0
+stopping_criterion:
+  _target_: relaxedgp.stopping_criteria.FrobeniusNormCriterion
+  tol: 1e-3

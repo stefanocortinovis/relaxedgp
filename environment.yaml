@@ -1,0 +1,26 @@
+name: relaxedgp-env
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - hydra-core
+  - ipykernel
+  - jupyterlab
+  - matplotlib
+  - openml
+  - pip
+  - pre-commit
+  - pytest
+  - pytest-cov
+  - ruff
+  - scikit-learn
+  - tqdm
+  - wandb
+  - pip:
+    - "gpflux==0.4.4"
+    - hydra-joblib-launcher
+    - tensorflow[and-cuda]
+    - git+https://github.com/stefanocortinovis/GPflow.git
+    - git+https://github.com/treforevans/uci_datasets.git
+    - --editable ".[experiments]"
